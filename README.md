@@ -1,4 +1,4 @@
 # multi-timer-backup-utility
-LZ4-based backup utility with multiple backup timers (e.g. hourly, daily, biweekly)
+LZ4-based backup utility with multiple backup timers (e.g. hourly, daily, biweekly).
 
-You can use https://github.com/sahar43/load-backup-lz4 to restore backup
+You can use [restore-backup-lz4](https://github.com/sahar43/restore-backup-lz4) to restore a backup.
