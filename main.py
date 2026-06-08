@@ -161,12 +161,12 @@ def clock():
          return chosen
 
    while True:
+      time.sleep(lowest_timer_minutes*60)
+
       timer = chooseTimer()
 
       if timer:
          backup(timer)
-
-      time.sleep(lowest_timer_minutes*60) # TODO: move to front
 
 
 # initialise the backups data file if it doesnt exist 
