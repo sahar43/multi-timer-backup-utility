@@ -1,0 +1,4 @@
+
+compression_level: 0 # 0-16
+block_linked: True # whether to use block-linked compression
+content_checksum: True # whether to perform a content checksum check

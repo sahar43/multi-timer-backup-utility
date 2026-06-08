@@ -13,6 +13,7 @@ backups_data_filename = "backups_data.json"
 # load timers settings
 
 timers_settings_file = "settings_timers.yml"
+
 timers_settings = []
 
 with open(timers_settings_file, 'r') as f:
@@ -40,8 +41,9 @@ lowest_timer_minutes = lowest_timer['timer_minutes']
 # load paths settings
 
 backups_settings_file = "settings_paths.yml"
-backups_path = ""
-to_backup_path = ""
+
+backups_path = None
+to_backup_path = None
 
 with open(backups_settings_file, 'r') as f:
    data = yaml.load(f, Loader=yaml.FullLoader)
@@ -50,6 +52,22 @@ with open(backups_settings_file, 'r') as f:
    to_backup_path = data['to_backup_path']
 
 backups_data_path = os.path.join(backups_path, backups_data_filename)
+
+
+# load compression settings
+
+compression_settings_file = "settings_compression.yml"
+
+compression_level = None
+block_linked = None
+content_checksum = None
+
+with open(compression_settings_file, 'r') as f:
+   data = yaml.load(f, Loader=yaml.FullLoader)
+
+   compression_level = data['compression_level']
+   block_linked = data['block_linked']
+   content_checksum = data['content_checksum']
 
 
 def getMinute():
@@ -98,7 +116,7 @@ def backup(timer):
       filename = getDateStr() + " " + timer['name'] + ".tar.lz4"
       
       with open(os.path.join(backups_path, filename), mode='wb') as file: # get the file
-         with lz4.frame.open(file, mode='wb') as lz4_file: # get the lz4 frame file
+         with lz4.frame.open(file, mode='wb', compression_level=compression_level, block_linked=block_linked, content_checksum=content_checksum) as lz4_file: # get the lz4 frame file
             with tarfile.open(fileobj=lz4_file, mode='w|') as tar: # open the lz4 frame file with streaming mode
                tar.add(to_backup_path, arcname=os.path.basename(to_backup_path)) # arcname ensures that the archive doesn't contain the full absolute path
       
