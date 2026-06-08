@@ -1,0 +1,13 @@
+# works best if all timers are a multiple of the lowest one
+
+name: hourly
+timer_minutes: 60
+keep_amount: 4 # number of backups to keep
+---
+name: daily
+timer_minutes: 1440
+keep_amount: 4 # number of backups to keep
+---
+name: biweekly
+timer_minutes: 20160
+keep_amount: 4 # number of backups to keep
