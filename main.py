@@ -40,16 +40,8 @@ lowest_timer_minutes = lowest_timer['timer_minutes']
 
 # load paths settings
 
-backups_settings_file = "settings_paths.yml"
-
-backups_path = None
-to_backup_path = None
-
-with open(backups_settings_file, 'r') as f:
-   data = yaml.load(f, Loader=yaml.FullLoader)
-
-   backups_path = data['backups_path']
-   to_backup_path = data['to_backup_path']
+backups_path = os.genenv("BACKUPS_PATH", "./backups")
+to_backup_path = os.genenv("TO_BACKUP_PATH", "./to_backup")
 
 backups_data_path = os.path.join(backups_path, backups_data_filename)
 
