@@ -2,7 +2,7 @@ import yaml
 import time
 import datetime
 import json
-import os.path
+import os
 import math
 import lz4.frame
 import tarfile
@@ -40,8 +40,8 @@ lowest_timer_minutes = lowest_timer['timer_minutes']
 
 # load paths settings
 
-backups_path = os.genenv("BACKUPS_PATH", "./backups")
-to_backup_path = os.genenv("TO_BACKUP_PATH", "./to_backup")
+backups_path = os.getenv("BACKUPS_PATH", "./backups")
+to_backup_path = os.getenv("TO_BACKUP_PATH", "./to_backup")
 
 backups_data_path = os.path.join(backups_path, backups_data_filename)
 
